@@ -1,10 +1,40 @@
 pipeline {
     agent any
 
+    tools {
+        maven 'Maven3'
+        jdk 'JDK17'
+    }
+
     stages {
-        stage('Check Stage') {
+
+        stage('Clone Code') {
             steps {
-                echo 'Stage is running'
+                git 'https://github.com/kishorekumars2025-AI/SmartCustomerOps.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                bat 'mvn clean compile'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                bat 'mvn test'
+            }
+        }
+
+        stage('Package') {
+            steps {
+                bat 'mvn package'
+            }
+        }
+
+        stage('Check Output') {
+            steps {
+                bat 'dir target'
             }
         }
     }
