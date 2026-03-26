@@ -8,13 +8,13 @@ pipeline {
 
     stages {
 
-        stage('Clone Code') {
+        stage('Checkout') {
             steps {
-                git 'https://github.com/kishorekumars2025-AI/SmartCustomerOps.git'
+                checkout scm
             }
         }
 
-        stage('Build') {
+        stage('Compile') {
             steps {
                 bat 'mvn clean compile'
             }
